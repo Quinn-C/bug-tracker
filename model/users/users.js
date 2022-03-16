@@ -20,7 +20,7 @@ export async function createUser(body){
     user_id = body.user_id;
     full_name = body.full_name;
     team_id = body.team_id;
-    const res = await query(`INSERT INTO users(user_id, full_name,team_id) VALUES ($1, $2) ON CONFLICT (user_id) DO NOTHING RETURNING *;`, [user_id, full_name,team_id]);
+    const res = await query(`INSERT INTO users(full_name,team_id) VALUES ($1, $2) RETURNING *;`, [full_name,team_id]);
     return res.rows;
 }
 

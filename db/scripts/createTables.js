@@ -11,7 +11,7 @@ const createTablesSqlString =
       );
       
       CREATE TABLE IF NOT EXISTS users (
-        user_id SERIAL PRIMARY KEY,
+        user_id int PRIMARY KEY,
         full_name varchar(255),
         created_at timestamp not null default CURRENT_TIMESTAMP,
         team_id int
