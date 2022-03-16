@@ -7,6 +7,9 @@ import cors  from 'cors';
 import logger  from 'morgan';
 
 import usersRouter  from './routes/users.js';
+import teamsRouter  from './routes/teams.js';
+import projectsRouter  from './routes/projects.js';
+import ticketsRouter  from './routes/tickets.js';
 
 const app = express();
 
@@ -17,7 +20,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//ALL TEAMS 
+app.use('/teams', teamsRouter);
+
+//ALL USERS 
 app.use('/users', usersRouter);
+
+//ALL TICKETS
+app.use('/tickets', ticketsRouter);
+
+//ALL PROJECTS 
+app.use('/projects', projectsRouter);
 
 app.use(function (req, res, next) {
   res.status(404).json({message: "We couldn't find what you were looking for 😞"})
