@@ -17,8 +17,8 @@ export async function getProjectById(id){
 
 //CREATE PROJECT
 export async function createProject(body){
-    project_name = body.project_name;
-    description = body.description;
+    const project_name = body.project_name;
+    const description = body.description;
     const res = await query(`INSERT INTO projects(project_name, description) VALUES ($1, $2) RETURNING *;`, [project_name, description]);
     return res.rows;
 }
@@ -32,9 +32,9 @@ export async function deleteProjectById(id){
 
 //UPDATE PROJECT INFO
 export async function updateProject(body){
-    project_id = body.project_id;
-    project_name = body.project_name;
-    description = body.description;
+    const project_id = body.project_id;
+    const project_name = body.project_name;
+    const description = body.description;
     const res = await query(`UPDATE projects SET project_name = $1, description = $2; WHERE project_id = $3,  RETURNING *`, [project_name, description, project_id]);
     return res.rows;
 }

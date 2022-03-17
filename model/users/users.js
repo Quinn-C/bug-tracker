@@ -17,10 +17,10 @@ export async function getUserById(id){
 
 //CREATE USER
 export async function createUser(body){
-    user_id = body.user_id;
-    full_name = body.full_name;
-    email = body.email;
-    phone = body.phone;
+    const user_id = body.user_id;
+    const full_name = body.full_name;
+    const email = body.email;
+    const phone = body.phone;
     const res = await query(`INSERT INTO users(user_id, full_name, email, phone) VALUES ($1, $2, $3, $4) RETURNING *;`, [user_id, full_name, email, phone]);
     return res.rows;
 }
@@ -34,10 +34,10 @@ export async function deleteUserById(id){
 
 //UPDATE USER INFO
 export async function updateUser(body){
-    user_id = body.user_id;
-    full_name = body.full_name;
-    email = body.email;
-    phone = body.phone;
+    const user_id = body.user_id;
+    const full_name = body.full_name;
+    const email = body.email;
+    const phone = body.phone;
     const res = await query(`UPDATE users SET full_name = $1, email = $2, phone = $3 WHERE user_id = $4 RETURNING *`, [full_name, email, phone, user_id]);
     return res.rows;
 }
