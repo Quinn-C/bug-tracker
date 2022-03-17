@@ -52,6 +52,6 @@ export async function updateTicket(body){
     const priority = body.priority;
     const estimate_hours = body.estimate_hours;
     const due_date = body.due_date;
-    const res = await query(`UPDATE tickets SET ticket_name = $1, description = $2, project_id = $3, ticket_author = $4, user_id = $5, status = $6, type = $7, priority = $8, estimate_hour = $9, due_date = $10 WHERE ticket_id = $11, RETURNING *`, [ticket_name, description, project_id, ticket_author, user_id, ticket_status, type, priority, estimate_hour, due_date, ticket_id]);
+    const res = await query(`UPDATE tickets SET ticket_name = $1, description = $2, project_id = $3, ticket_author = $4, user_id = $5, status = $6, type = $7, priority = $8, estimate_hour = $9, due_date = $10 WHERE ticket_id = $11, RETURNING *`, [ticket_name, description, project_id, ticket_author, user_id, ticket_status, type, priority, estimate_hours, due_date, ticket_id]);
     return res.rows;
 }
