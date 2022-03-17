@@ -26,7 +26,7 @@ router.get("/:user_id", function (req, res) {
 router.post("/", function (req, res) {
   //get body info from req.body
   const body = req.body;
-  const result = await createUser();
+  const result = await createUser(body);
   res.json({ 
     sucess: true,
     message: result});

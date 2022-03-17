@@ -20,9 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-//ALL TEAMS 
-app.use('/teams', teamsRouter);
-
 //ALL USERS 
 app.use('/users', usersRouter);
 
