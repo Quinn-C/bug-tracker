@@ -4,19 +4,19 @@ import {query} from '../../db/connections.js';
 //USER_PROJECT RELATIOSHIP INFO: user_id, project_id
 //GET ALL
 export async function getAllRelationships(){
-    const res = await query(`SELET * FROM relationships;`);
+    const res = await query(`SELECT * FROM relationships;`);
     return res.rows;
 }
 
 //GET RELATIONSHIP BY USER ID
 export async function getRelationshipsByUserId(id){
-    const res = await query(`SELET * FROM relationships WHERE user_id = $1;`, [id]);
+    const res = await query(`SELECT * FROM relationships WHERE user_id = $1;`, [id]);
     return res.rows;
 }
 
 //GET RELATIONSHIP BY PROJECT ID
 export async function getRelationshipsByProjectId(id){
-    const res = await query(`SELET * FROM relationships WHERE project_id = $1;`, [id]);
+    const res = await query(`SELECT * FROM relationships WHERE project_id = $1;`, [id]);
     return res.rows;
 }
 

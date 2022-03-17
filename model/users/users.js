@@ -5,13 +5,13 @@ import {query} from '../../db/connections.js';
 
 //GET ALL
 export async function getAllUsers(){
-    const res = await query(`SELET * FROM users;`);
+    const res = await query(`SELECT * FROM users;`);
     return res.rows;
 }
 
 //GET USER BY ID
 export async function getUserById(id){
-    const res = await query(`SELET * FROM users WHERE user_id = $1;`, [id]);
+    const res = await query(`SELECT * FROM users WHERE user_id = $1;`, [id]);
     return res.rows;
 }
 
@@ -21,7 +21,7 @@ export async function createUser(body){
     const full_name = body.full_name;
     const email = body.email;
     const phone = body.phone;
-    const res = await query(`INSERT INTO users(user_id, full_name, email, phone) VALUES ($1, $2, $3, $4) RETURNING *;`, [user_id, full_name, email, phone]);
+    const res = await query(`INSERT INTO users(user_id, full_name, email, phone) VALUES ($1, $2, $3, $4) ON CONFLICT (user_id) DO NOTHING RETURNING *;`, [user_id, full_name, email, phone]);
     return res.rows;
 }
 

@@ -5,13 +5,13 @@ import {query} from '../../db/connections.js';
 
 //GET ALL
 export async function getAllTickets(){
-    const res = await query(`SELET * FROM tickets;`);
+    const res = await query(`SELECT * FROM tickets;`);
     return resconst .rows;
 }
 
 //GET TICKET BY ID
 export async function getTicketById(id){
-    const res = await query(`SELET * FROM tickets WHERE ticket_id = $1;`, [id]);
+    const res = await query(`SELECT * FROM tickets WHERE ticket_id = $1;`, [id]);
     return res.rows;
 }
 
