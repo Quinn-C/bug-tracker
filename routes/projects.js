@@ -11,7 +11,7 @@ router.get("/", function (req, res) {
 });
 
 
-/* GET user by id. */
+/* GET project by id. */
 router.get("/:project_id", function (req, res) {
   //get user_id by params from the req
   const project_id = Number(req.params.project_id)
@@ -44,7 +44,7 @@ router.delete("/:project_id", function (req, res) {
 });
 
 
-/* GET all projects listing. */
+/* Update project */
 router.put("/", function (req, res) {
   const body = req.body;
   const result = await updateProject(body);
