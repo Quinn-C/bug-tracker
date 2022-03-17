@@ -18,7 +18,8 @@ export async function getProjectById(id){
 //CREATE PROJECT
 export async function createProject(body){
     project_name = body.project_name;
-    const res = await query(`INSERT INTO projects(project_name) VALUES ($1) RETURNING *;`, [team_name]);
+    description = body.description;
+    const res = await query(`INSERT INTO projects(project_name, description) VALUES ($1, $2) RETURNING *;`, [project_name, description]);
     return res.rows;
 }
 
@@ -33,6 +34,7 @@ export async function deleteProjectById(id){
 export async function updateProject(body){
     project_id = body.project_id;
     project_name = body.project_name;
-    const res = await query(`UPDATE projects SET project_name = $1 WHERE project_id = $2,  RETURNING *`, [project_name, project_id]);
+    description = body.description;
+    const res = await query(`UPDATE projects SET project_name = $1, description = $2; WHERE project_id = $3,  RETURNING *`, [project_name, description, project_id]);
     return res.rows;
 }
