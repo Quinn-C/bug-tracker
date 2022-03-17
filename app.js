@@ -7,7 +7,6 @@ import cors  from 'cors';
 import logger  from 'morgan';
 
 import usersRouter  from './routes/users.js';
-import teamsRouter  from './routes/teams.js';
 import projectsRouter  from './routes/projects.js';
 import ticketsRouter  from './routes/tickets.js';
 

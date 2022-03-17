@@ -1,9 +1,11 @@
 import express from "express";
-import { getAllUsers, getUserById, createUser, deleteUserById, updateUser, getRelationshipsByUserId, createRelationship, deleteRelationshipByTwoIds } from "../model/users/users";
+import { getAllUsers, getUserById, createUser, deleteUserById, updateUser} from "../model/users/users.js";
+import {getRelationshipsByUserId, createRelationship, deleteRelationshipByTwoIds} from "../model/relationships/relationships.js";
+
 const router = express.Router();
 
 /* GET all users listing. */
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
   const body = await getAllUsers();
   res.json({ 
     sucess: true,
@@ -12,7 +14,7 @@ router.get("/", function (req, res) {
 
 
 /* GET user by id. */
-router.get("/:user_id", function (req, res) {
+router.get("/:user_id", async function (req, res) {
   //get user_id by params from the req
   const user_id = Number(req.params.user_id)
   const result = await getUserById(user_id);
@@ -23,7 +25,7 @@ router.get("/:user_id", function (req, res) {
 
 
 /* POST a new user. */
-router.post("/", function (req, res) {
+router.post("/", async function (req, res) {
   //get body info from req.body
   const body = req.body;
   const result = await createUser(body);
@@ -34,7 +36,7 @@ router.post("/", function (req, res) {
 
 
 /* DELETE user by id. */
-router.delete("/:user_id", function (req, res) {
+router.delete("/:user_id", async function (req, res) {
   //get user_id by params from the req
   const user_id = Number(req.params.user_id)
   const result = await deleteUserById(user_id);
@@ -45,7 +47,7 @@ router.delete("/:user_id", function (req, res) {
 
 
 /* UPDATE user. */
-router.put("/", function (req, res) {
+router.put("/", async function (req, res) {
   const body = req.body;
   const result = await updateUser(body);
   res.json({ 
@@ -54,7 +56,7 @@ router.put("/", function (req, res) {
 });
 
 /* GET relationship - all projects for one user. */
-router.get("/:user_id/projects", function (req, res) {
+router.get("/:user_id/projects", async function (req, res) {
   //get user_id by params from the req
   const user_id = Number(req.params.user_id)
   const result = await getRelationshipsByUserId(user_id);
@@ -64,7 +66,7 @@ router.get("/:user_id/projects", function (req, res) {
 });
 
 /* POST relationship - add a project for a user. */
-router.post("/:user_id/:project_id", function (req, res) {
+router.post("/:user_id/:project_id", async function (req, res) {
   //get body info from req.body
   const project_id = Number(req.params.project_id);
   const user_id = Number(req.params.user_id)
@@ -76,7 +78,7 @@ router.post("/:user_id/:project_id", function (req, res) {
 
 
 /* DELETE relationship - delete a user from a project. */
-router.delete("/:user_id/:project_id", function (req, res) {
+router.delete("/:user_id/:project_id", async function (req, res) {
   //get project_id by params from the req
   const project_id = Number(req.params.project_id);
   const user_id = Number(req.params.user_id)

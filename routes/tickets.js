@@ -4,7 +4,7 @@ import {getAllTickets, getTicketById, createTicket, deleteTicketById, updateTick
 const router = express.Router();
 
 /* GET all tickets listing. */
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
   const body = await getAllTickets();
   res.json({ 
     sucess: true,
@@ -13,7 +13,7 @@ router.get("/", function (req, res) {
 
 
 /* GET ticket by id. */
-router.get("/:ticket_id", function (req, res) {
+router.get("/:ticket_id", async function (req, res) {
   //get user_id by params from the req
   const ticket_id = Number(req.params.ticket_id)
   const result = await getTicketById(ticket_id);
@@ -24,7 +24,7 @@ router.get("/:ticket_id", function (req, res) {
 
 
 /* POST a new ticket. */
-router.post("/", function (req, res) {
+router.post("/", async function (req, res) {
   //get body info from req.body
   const body = req.body;
   const result = await createTicket(body);
@@ -35,7 +35,7 @@ router.post("/", function (req, res) {
 
 
 /* DELETE project by id. */
-router.delete("/:ticket_id", function (req, res) {
+router.delete("/:ticket_id", async function (req, res) {
   //get ticket_id by params from the req
   const ticket_id = Number(req.params.ticket_id);
   const result = await deleteTicketById(ticket_id);
@@ -46,7 +46,7 @@ router.delete("/:ticket_id", function (req, res) {
 
 
 /* UPDATE tickets listing. */
-router.put("/", function (req, res) {
+router.put("/", async function (req, res) {
   const body = req.body;
   const result = await updateTicket(body);
   res.json({ 

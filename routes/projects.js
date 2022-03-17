@@ -1,9 +1,11 @@
 import express from "express";
-import { getAllProjects, getProjectById, createProject, deleteProjectById, updateProject, getRelationshipsByProjectId, createRelationship, deleteRelationshipByTwoIds} from "../model/projects/projects";
+import { getAllProjects, getProjectById, createProject, deleteProjectById, updateProject} from "../model/projects/projects.js";
+import {getRelationshipsByProjectId, createRelationship, deleteRelationshipByTwoIds} from "../model/relationships/relationships.js";
+
 const router = express.Router();
 
 /* GET all projects listing. */
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
   const body = await getAllProjects();
   res.json({ 
     sucess: true,
@@ -12,7 +14,7 @@ router.get("/", function (req, res) {
 
 
 /* GET project by id. */
-router.get("/:project_id", function (req, res) {
+router.get("/:project_id", async function (req, res) {
   //get user_id by params from the req
   const project_id = Number(req.params.project_id)
   const result = await getProjectById(project_id);
@@ -23,7 +25,7 @@ router.get("/:project_id", function (req, res) {
 
 
 /* POST a new project. */
-router.post("/", function (req, res) {
+router.post("/", async function (req, res) {
   //get body info from req.body
   const body = req.body;
   const result = await createProject(body);
@@ -34,7 +36,7 @@ router.post("/", function (req, res) {
 
 
 /* DELETE project by id. */
-router.delete("/:project_id", function (req, res) {
+router.delete("/:project_id", async function (req, res) {
   //get project_id by params from the req
   const project_id = Number(req.params.project_id);
   const result = await deleteProjectById(project_id);
@@ -45,7 +47,7 @@ router.delete("/:project_id", function (req, res) {
 
 
 /* Update project */
-router.put("/", function (req, res) {
+router.put("/", async function (req, res) {
   const body = req.body;
   const result = await updateProject(body);
   res.json({ 
@@ -55,7 +57,7 @@ router.put("/", function (req, res) {
 
 
 /* GET relationships - one projects get all its users. */
-router.get("/:project_id/users", function (req, res) {
+router.get("/:project_id/users", async function (req, res) {
   //get user_id by params from the req
   const project_id = Number(req.params.project_id)
   const result = await getRelationshipsByProjectId(project_id);
@@ -66,7 +68,7 @@ router.get("/:project_id/users", function (req, res) {
 
 
 /* POST relationship - add a user in a project. */
-router.post("/:project_id/:user_id", function (req, res) {
+router.post("/:project_id/:user_id", async function (req, res) {
   //get body info from req.body
   const project_id = Number(req.params.project_id);
   const user_id = Number(req.params.user_id)
@@ -78,10 +80,10 @@ router.post("/:project_id/:user_id", function (req, res) {
 
 
 /* DELETE relationship - delete a user from a project. */
-router.delete("/:project_id/:user_id", function (req, res) {
+router.delete("/:project_id/:user_id", async function (req, res) {
   //get project_id by params from the req
   const project_id = Number(req.params.project_id);
-  const user_id = Number(req.params.user_id)
+  const user_id = Number(req.params.user_id);
   const result = await deleteRelationshipByTwoIds(project_id, user_id);
   res.json({ 
     sucess: true,
