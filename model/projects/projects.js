@@ -35,6 +35,6 @@ export async function updateProject(body){
     const project_id = body.project_id;
     const project_name = body.project_name;
     const description = body.description;
-    const res = await query(`UPDATE projects SET project_name = $1, description = $2; WHERE project_id = $3,  RETURNING *`, [project_name, description, project_id]);
+    const res = await query(`UPDATE projects SET project_name = $1, description = $2 WHERE project_id = $3 RETURNING *`, [project_name, description, project_id]);
     return res.rows;
 }
