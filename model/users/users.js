@@ -19,8 +19,9 @@ export async function getUserById(id){
 export async function createUser(body){
     user_id = body.user_id;
     full_name = body.full_name;
-    team_id = body.team_id;
-    const res = await query(`INSERT INTO users(full_name,team_id) VALUES ($1, $2) RETURNING *;`, [full_name,team_id]);
+    email = body.email;
+    phone = body.phone;
+    const res = await query(`INSERT INTO users(user_id, full_name, email, phone) VALUES ($1, $2, $3, $4) RETURNING *;`, [user_id, full_name, email, phone]);
     return res.rows;
 }
 
@@ -35,7 +36,8 @@ export async function deleteUserById(id){
 export async function updateUser(body){
     user_id = body.user_id;
     full_name = body.full_name;
-    team_id = body.team_id;
-    const res = await query(`UPDATE users SET full_name = $1, team_id = $2 WHERE user_id = $3 RETURNING *`, [full_name, team_id, user_id]);
+    email = body.email;
+    phone = body.phone;
+    const res = await query(`UPDATE users SET full_name = $1, email = $2, phone = $3 WHERE user_id = $4 RETURNING *`, [full_name, email, phone, user_id]);
     return res.rows;
 }
