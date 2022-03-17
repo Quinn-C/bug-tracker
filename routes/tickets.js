@@ -1,4 +1,6 @@
 import express from "express";
+import {getAllTickets, getTicketById, createTicket, deleteTicketById, updateTicket} from '../model/tickets/tickets.js';
+
 const router = express.Router();
 
 /* GET all tickets listing. */

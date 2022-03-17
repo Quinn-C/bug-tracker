@@ -21,10 +21,8 @@ export async function getRelationshipsByProjectId(id){
 }
 
 //CREATE RELATIONSHIP
-export async function createRelationship(body){
-    user_id = body.user_id;
-    project_id = body.project_id;
-    const res = await query(`INSERT INTO relationships(user_id, project_id) VALUES ($1, $2) RETURNING *;`, [user_id, project_id]);
+export async function createRelationship(project_id, user_id){
+    const res = await query(`INSERT INTO relationships(project_id, user_id) VALUES ($1, $2) RETURNING *;`, [project_id, user_id]);
     return res.rows;
 }
 
