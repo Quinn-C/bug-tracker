@@ -6,7 +6,7 @@ import {query} from '../../db/connections.js';
 //GET ALL
 export async function getAllTickets(){
     const res = await query(`SELECT * FROM tickets;`);
-    return resconst .rows;
+    return res.rows;
 }
 
 //GET TICKET BY ID
